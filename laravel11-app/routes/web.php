@@ -66,3 +66,10 @@ Route::put('/api/account/{id}', function (Request $request, $id) {
     return response()->json(['message' => 'Tài khoản không tồn tại!'], 404);
 });
 
+Route::get('/api/accounts', function (Request $request) {
+    $perPage = $request->input('per_page', 10); // Số lượng tài khoản mỗi trang (mặc định là 10)
+    $accounts = App\Models\NguoiDung::paginate($perPage);
+
+    return response()->json($accounts);
+});
+
